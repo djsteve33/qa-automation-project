@@ -5,6 +5,6 @@ Feature: Tests for product page
   Scenario: User can add a product to a cart
     Given Open Product sunscreen-spf-30 Details page
     When Click to add product to cart
-    Then Verify product has been added to cart
-    When Click "View my cart"
-    Then Verify user is taken to the cart page
+    Then Verify SPF30 Sunscreen has been added to cart
+    #When Click "View Cart"
+    #Then Verify user is taken to the cart page

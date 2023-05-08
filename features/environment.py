@@ -1,4 +1,6 @@
 from selenium import webdriver
+import allure
+from allure_commons.types import AttachmentType
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -19,7 +21,7 @@ def browser_init(context):
     # context.driver = webdriver.Firefox(executable_path="geckodriver.exe", options=options)
     ######################
 
-    #context.driver = webdriver.Chrome()
+    # context.driver = webdriver.Chrome()
     # context.browser = webdriver.Safari()
     # context.browser = webdriver.Firefox(service=service)
 
@@ -35,19 +37,27 @@ def browser_init(context):
 
     # for browerstack ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
-    bs_user = 'stevewomble_yFi4LI'
-    bs_key = 'KpFewtgw342Jbeq47FRC'
+    # bs_user = 'stevewomble_yFi4LI'
+    # bs_key = 'KpFewtgw342Jbeq47FRC'
+    #
+    # desired_cap = {
+    #     'browserName': 'Firefox',
+    #     'bstack:options': {
+    #         'os': 'Windows',
+    #         'osVersion': '10'
+    #
+    #     }
+    # }
+    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    # context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
+    #
 
-    desired_cap = {
-        'browserName': 'Firefox',
-        'bstack:options': {
-            'os': 'Windows',
-            'osVersion': '10'
 
-        }
-    }
-    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-    context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
+    # Mobile-Web Emulator
+    mobile_emulation = {"deviceName": "iPhone 12 Pro"}
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    context.driver = webdriver.Chrome(options=chrome_options)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
